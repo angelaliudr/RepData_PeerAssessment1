@@ -23,19 +23,6 @@ dim(data)
 
 ```r
 head(data)
-```
-
-```
-##   steps       date interval
-## 1    NA 2012-10-01        0
-## 2    NA 2012-10-01        5
-## 3    NA 2012-10-01       10
-## 4    NA 2012-10-01       15
-## 5    NA 2012-10-01       20
-## 6    NA 2012-10-01       25
-```
-
-```r
 str(data)
 ```
 
@@ -58,23 +45,13 @@ per_day_total <- ddply(data, .(date), summarize, sum=sum(steps))
 head(per_day_total)
 ```
 
-```
-##         date   sum
-## 1 2012-10-01    NA
-## 2 2012-10-02   126
-## 3 2012-10-03 11352
-## 4 2012-10-04 12116
-## 5 2012-10-05 13294
-## 6 2012-10-06 15420
-```
-
 ### Then, plot a histogram of the total steps per day
 
 ```r
 hist(per_day_total$sum, nclass=30, main="Histogram of total number of steps per day", xlab="Total number of steps per day", ylab="Count")
 ```
 
-![](PA1_template_files/figure-html/hist-per-day-1.png)<!-- -->
+![plot of chunk hist-per-day](figure/hist-per-day-1.png)
 
 ### Finally, compute the mean and median of the above total steps
 
@@ -99,7 +76,7 @@ per_interval_stat <- ddply(na_omit_data, .(interval), summarize, sum=sum(steps),
 plot(per_interval_stat$interval, per_interval_stat$means, type="l", main="Average number of steps per interval over time", xlab="Time interval in 5-minute", ylab="Average number of steps per interval")
 ```
 
-![](PA1_template_files/figure-html/per-interval-mean-1.png)<!-- -->
+![plot of chunk per-interval-mean](figure/per-interval-mean-1.png)
 
 
 ### Find the time interval that has the maximum average number of steps across days
@@ -146,30 +123,7 @@ for (index in index_NA_rows) {
 #imputed_data$steps[index_NA_rows] = per_interval_stat$means[(imputed_data$interval[index_NA_rows] == per_interval_stat$interval)]
 
 head(imputed_data)
-```
-
-```
-##       steps       date interval
-## 1 1.7169811 2012-10-01        0
-## 2 0.3396226 2012-10-01        5
-## 3 0.1320755 2012-10-01       10
-## 4 0.1509434 2012-10-01       15
-## 5 0.0754717 2012-10-01       20
-## 6 2.0943396 2012-10-01       25
-```
-
-```r
 tail(imputed_data)
-```
-
-```
-##           steps       date interval
-## 17563 2.6037736 2012-11-30     2330
-## 17564 4.6981132 2012-11-30     2335
-## 17565 3.3018868 2012-11-30     2340
-## 17566 0.6415094 2012-11-30     2345
-## 17567 0.2264151 2012-11-30     2350
-## 17568 1.0754717 2012-11-30     2355
 ```
 
 ### Plot a new histogram using the imputed data 
@@ -181,7 +135,7 @@ imputed_per_day_total <- ddply(imputed_data, .(date), summarize, sum=sum(steps))
 hist(imputed_per_day_total$sum, nclass=30, main="Histogram of total number of steps per day (Imputed)", xlab="Total number of steps per day", ylab="Count")
 ```
 
-![](PA1_template_files/figure-html/impute_hist-1.png)<!-- -->
+![plot of chunk impute_hist](figure/impute_hist-1.png)
 
 
 ### Compute the mean and median of daily number of steps with imputed data 
@@ -232,16 +186,6 @@ new_data = cbind(imputed_data, day_status)
 head(new_data)
 ```
 
-```
-##       steps       date interval day_status
-## 1 1.7169811 2012-10-01        0    weekday
-## 2 0.3396226 2012-10-01        5    weekday
-## 3 0.1320755 2012-10-01       10    weekday
-## 4 0.1509434 2012-10-01       15    weekday
-## 5 0.0754717 2012-10-01       20    weekday
-## 6 2.0943396 2012-10-01       25    weekday
-```
-
 ### Finally, we will create a multi-panel plot showing the per-5-minute interval average number of steps across all days, split into "weekend" view and "weekday" view. 
 
 
@@ -260,5 +204,28 @@ mtext("Time Interval", side=1, outer=TRUE, cex=1.5)
 mtext("Average number of steps over multiple days", side=2, outer=TRUE, line=-1, cex=1.5)
 ```
 
-![](PA1_template_files/figure-html/weekday_view-1.png)<!-- -->
+![plot of chunk weekday_view](figure/weekday_view-1.png)
+
+
+## Render Rmd file to HTML
+
+
+```r
+library(knitr)
+knit("PA1_template.Rmd", "PA1_template.md")
+```
+
+```
+## 
+## 
+## processing file: PA1_template.Rmd
+```
+
+```
+## Error in parse_block(g[-1], g[1], params.src): duplicate label 'load-data'
+```
+
+```r
+browseURL("PA1_template.html")
+```
 

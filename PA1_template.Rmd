@@ -168,3 +168,14 @@ mtext("Average number of steps over multiple days", side=2, outer=TRUE, line=-1,
 
 ```
 
+
+## Render Rmd file to HTML
+
+```{r render}
+
+library(knitr)
+knit("PA1_template.Rmd", "PA1_template.md")
+browseURL("PA1_template.html")
+
+```
+
