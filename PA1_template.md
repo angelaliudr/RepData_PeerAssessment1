@@ -210,11 +210,6 @@ mtext("Average number of steps over multiple days", side=2, outer=TRUE, line=-1,
 ## Render Rmd file to HTML
 
 
-```r
-library(knitr)
-knit("PA1_template.Rmd", "PA1_template.md")
-```
-
 ```
 ## 
 ## 
@@ -225,7 +220,8 @@ knit("PA1_template.Rmd", "PA1_template.md")
 ## Error in parse_block(g[-1], g[1], params.src): duplicate label 'load-data'
 ```
 
-```r
-browseURL("PA1_template.html")
+```
+## 
+## Output created: PA1_template.html
 ```
 

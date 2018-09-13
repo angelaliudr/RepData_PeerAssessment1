@@ -22,7 +22,7 @@ str(data)
 
 ## What is the mean total number of steps taken per day?
 
-### First, compute each day's total value of steps
+### First, compute each day's total value of steps. 
 ```{r per-day-sum}
 
 library('plyr') # load plyr package
@@ -33,7 +33,7 @@ head(per_day_total)
 
 ```
 
-### Then, plot a histogram of the total steps per day
+### Then, plot a histogram of the total steps per day. 
 ```{r hist-per-day, fig.height=5}
 
 hist(per_day_total$sum, nclass=30, main="Histogram of total number of steps per day", xlab="Total number of steps per day", ylab="Count")
@@ -41,7 +41,7 @@ hist(per_day_total$sum, nclass=30, main="Histogram of total number of steps per 
 
 ```
 
-### Finally, compute the mean and median of the above total steps
+### Finally, compute the mean and median of the above total steps. 
 ```{r per-day-stat}
 
 summary(per_day_total$sum) 
@@ -62,7 +62,7 @@ plot(per_interval_stat$interval, per_interval_stat$means, type="l", main="Averag
 ```
 
 
-### Find the time interval that has the maximum average number of steps across days
+### Find the time interval that has the maximum average number of steps across days. 
 
 
 ```{r per_interval_max}
@@ -77,7 +77,7 @@ per_interval_stat$interval[index]
 
 ## Imputing missing values
 
-### First find the number of rows with NA or missing values 
+### First find the number of rows with NA or missing values.  
 ```{r imputing_NA_rows}
 num_rows_NA <- sum(is.na(data$steps))
 
@@ -107,7 +107,7 @@ tail(imputed_data)
 
 ```
 
-### Plot a new histogram using the imputed data 
+### Plot a new histogram using the imputed data. 
 
 ```{r impute_hist}
 imputed_per_day_total <- ddply(imputed_data, .(date), summarize, sum=sum(steps)) 
@@ -116,7 +116,7 @@ hist(imputed_per_day_total$sum, nclass=30, main="Histogram of total number of st
 ```
 
 
-### Compute the mean and median of daily number of steps with imputed data 
+### Compute the mean and median of daily number of steps with imputed data.  
 
 ```{r impute_stat}
 summary(imputed_per_day_total$sum) 
@@ -127,7 +127,7 @@ As shown by the new histogram plot and new summary statistics, by imputing the m
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
-### Then, we will create a new vector, which is a factor with two levels, "weekday" and "weekend". 
+### First, we will create a new vector, which is a factor with two levels, "weekday" and "weekend". 
 
 ```{r day_of_week}
 
@@ -171,10 +171,11 @@ mtext("Average number of steps over multiple days", side=2, outer=TRUE, line=-1,
 
 ## Render Rmd file to HTML
 
-```{r render}
+```{r render, echo=FALSE, results="hide"}
 
 library(knitr)
 knit("PA1_template.Rmd", "PA1_template.md")
+rmarkdown::render("PA1_template.md", output_file="PA1_template.html")
 browseURL("PA1_template.html")
 
 ```
