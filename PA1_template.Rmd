@@ -27,7 +27,9 @@ str(data)
 
 library('plyr') # load plyr package
 
-per_day_total <- ddply(data, .(date), summarize, sum=sum(steps)) 
+na_omit_data = na.omit(data)
+
+per_day_total <- ddply(na_omit_data, .(date), summarize, sum=sum(steps)) 
 
 head(per_day_total)
 
@@ -52,8 +54,6 @@ summary(per_day_total$sum)
 ## What is the average daily activity pattern?
 
 ```{r per-interval-mean, fig.height=5}
-
-na_omit_data = na.omit(data)
 
 per_interval_stat <- ddply(na_omit_data, .(interval), summarize, sum=sum(steps), means=mean(steps)) 
 

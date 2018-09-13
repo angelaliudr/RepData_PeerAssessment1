@@ -40,7 +40,9 @@ str(data)
 ```r
 library('plyr') # load plyr package
 
-per_day_total <- ddply(data, .(date), summarize, sum=sum(steps)) 
+na_omit_data = na.omit(data)
+
+per_day_total <- ddply(na_omit_data, .(date), summarize, sum=sum(steps)) 
 
 head(per_day_total)
 ```
@@ -60,8 +62,8 @@ summary(per_day_total$sum)
 ```
 
 ```
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
-##      41    8841   10765   10766   13294   21194       8
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##      41    8841   10765   10766   13294   21194
 ```
 
 
@@ -69,8 +71,6 @@ summary(per_day_total$sum)
 
 
 ```r
-na_omit_data = na.omit(data)
-
 per_interval_stat <- ddply(na_omit_data, .(interval), summarize, sum=sum(steps), means=mean(steps)) 
 
 plot(per_interval_stat$interval, per_interval_stat$means, type="l", main="Average number of steps per interval over time", xlab="Time interval in 5-minute", ylab="Average number of steps per interval")
@@ -235,7 +235,7 @@ rmarkdown::render("PA1_template.md", output_file="PA1_template.html")
 ```
 
 ```
-## "C:/Program Files/RStudio/bin/pandoc/pandoc" +RTS -K512m -RTS PA1_template.utf8.md --to html4 --from markdown+autolink_bare_uris+ascii_identifiers+tex_math_single_backslash --output PA1_template.html --smart --email-obfuscation none --self-contained --standalone --section-divs --template "C:\Users\liua\Documents\R\win-library\3.5\rmarkdown\rmd\h\default.html" --no-highlight --variable highlightjs=1 --variable "theme:bootstrap" --include-in-header "C:\Users\liua\AppData\Local\Temp\RtmpgV3AP3\rmarkdown-str2d246daa22d6.html" --mathjax --variable "mathjax-url:https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+## "C:/Program Files/RStudio/bin/pandoc/pandoc" +RTS -K512m -RTS PA1_template.utf8.md --to html4 --from markdown+autolink_bare_uris+ascii_identifiers+tex_math_single_backslash --output PA1_template.html --smart --email-obfuscation none --self-contained --standalone --section-divs --template "C:\Users\liua\Documents\R\win-library\3.5\rmarkdown\rmd\h\default.html" --no-highlight --variable highlightjs=1 --variable "theme:bootstrap" --include-in-header "C:\Users\liua\AppData\Local\Temp\RtmpgV3AP3\rmarkdown-str2d24287a4431.html" --mathjax --variable "mathjax-url:https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
 ```
 
 ```
