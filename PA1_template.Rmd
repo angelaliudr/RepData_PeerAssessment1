@@ -171,7 +171,7 @@ mtext("Average number of steps over multiple days", side=2, outer=TRUE, line=-1,
 
 ## Render Rmd file to HTML
 
-```{r render, echo=FALSE, results="hide", message = FALSE, warnings = FALSE}
+```{r render}
 
 # There appears to be a bug with knitr and the first label in an R chunk will get a
 #     duplicate label error. E.g., see: 

@@ -210,7 +210,40 @@ mtext("Average number of steps over multiple days", side=2, outer=TRUE, line=-1,
 ## Render Rmd file to HTML
 
 
+```r
+# There appears to be a bug with knitr and the first label in an R chunk will get a
+#     duplicate label error. E.g., see: 
+#     https://stackoverflow.com/questions/36868287/purl-within-knit-duplicate-label-error/49286316
+# I have chosen to ignore this bug. 
+
+library(knitr)
+knit("PA1_template.Rmd", "PA1_template.md")
+```
+
+```
+## 
+## 
+## processing file: PA1_template.Rmd
+```
+
 ```
 ## Error in parse_block(g[-1], g[1], params.src): duplicate label 'read_in_data'
+```
+
+```r
+rmarkdown::render("PA1_template.md", output_file="PA1_template.html")
+```
+
+```
+## "C:/Program Files/RStudio/bin/pandoc/pandoc" +RTS -K512m -RTS PA1_template.utf8.md --to html4 --from markdown+autolink_bare_uris+ascii_identifiers+tex_math_single_backslash --output PA1_template.html --smart --email-obfuscation none --self-contained --standalone --section-divs --template "C:\Users\liua\Documents\R\win-library\3.5\rmarkdown\rmd\h\default.html" --no-highlight --variable highlightjs=1 --variable "theme:bootstrap" --include-in-header "C:\Users\liua\AppData\Local\Temp\RtmpgV3AP3\rmarkdown-str2d246daa22d6.html" --mathjax --variable "mathjax-url:https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+```
+
+```
+## 
+## Output created: PA1_template.html
+```
+
+```r
+browseURL("PA1_template.html")
 ```
 
