@@ -10,7 +10,7 @@ output:
 
 ## Loading and preprocessing the data
 
-```{r load-data}
+```{r read_in_data}
 
 data <- read.csv(file="activity.csv", header=TRUE, sep=",")
 
@@ -171,7 +171,12 @@ mtext("Average number of steps over multiple days", side=2, outer=TRUE, line=-1,
 
 ## Render Rmd file to HTML
 
-```{r render, echo=FALSE, results="hide"}
+```{r render, echo=FALSE, results="hide", message = FALSE, warnings = FALSE}
+
+# There appears to be a bug with knitr and the first label in an R chunk will get a
+#     duplicate label error. E.g., see: 
+#     https://stackoverflow.com/questions/36868287/purl-within-knit-duplicate-label-error/49286316
+# I have chosen to ignore this bug. 
 
 library(knitr)
 knit("PA1_template.Rmd", "PA1_template.md")
