@@ -12,6 +12,8 @@ output:
 
 ```{r read_in_data}
 
+setwd("./")
+
 data <- read.csv(file="activity.csv", header=TRUE, sep=",")
 
 dim(data)
